@@ -4,7 +4,7 @@ import Preloader from "../../common/Preloader/Preloader";
 import {ProfileType} from "../../../redux/store";
 
 type Props =  {
-    profile: ProfileType
+    profile: ProfileType | null
 }
 function ProfileInfo(props:Props) {
     if(!props.profile){

@@ -9,7 +9,7 @@ export type ProfileProp = {
     // posts: Array<PostsType>
     // newPostText:string
     // dispatch:(action: ActionType)=>void
-    profile: ProfileType;
+    profile: ProfileType|null;
 }
 
 
