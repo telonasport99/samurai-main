@@ -1,0 +1,10 @@
+.nav{
+    background-color: beige;
+    grid-area: n;
+}
+.active{
+    color: goldenrod;
+}
+a{
+    text-decoration: none;
+}
