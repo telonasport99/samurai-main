@@ -1,6 +1,7 @@
 import profileReducer from "./profile-reducer";
 import dialogsReducer from "./dialogs-reducer";
 import {UsersType} from "./user-reducer";
+import {setAuthUserData} from "./auth-reducer";
 
 export type StoreType={
     _state:RootStateType
@@ -11,7 +12,10 @@ export type StoreType={
 }
 export type ActionType= AddPostActionType|OnPostChangeActionType|UpdateNewMessageType|SendMessageType |
     UsersActionFollowType | UsersActionUnFollowType|UsersSetUserType |
-    SetCurrentPageType | SetTotalCountType |ToggleIsFetchingType | SetUserProfileType
+    SetCurrentPageType | SetTotalCountType |ToggleIsFetchingType | SetUserProfileType|ReturnType<typeof setAuthUserData>
+
+
+
 export type AddPostActionType = {
     type:'ADD-POST'
 }
