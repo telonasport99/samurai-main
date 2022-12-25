@@ -2,7 +2,7 @@ import React from "react";
 import {
     ActionType,
     SetCurrentPageType,
-    SetTotalCountType, ToggleIsFetchingType,
+    SetTotalCountType, ToggleIsFetchingType, ToggleIsFollowingProgress,
     UsersActionFollowType,
     UsersActionUnFollowType,
     UsersSetUserType
@@ -25,13 +25,15 @@ export type InitialStateType = {
     totalUserCount:number
     currentPage:number
     isFetching:boolean
+    followingInProgress:boolean
 }
 let initialState:InitialStateType = {
         users: [],
         pageSize: 5,
         totalUserCount:20,
         currentPage:1,
-        isFetching:false
+        isFetching:false,
+        followingInProgress:false
 }
 const usersReducer=(state:InitialStateType=initialState,action: ActionType): InitialStateType=> {
     switch (action.type) {
@@ -47,6 +49,8 @@ const usersReducer=(state:InitialStateType=initialState,action: ActionType): Ini
             return {...state, totalUserCount: action.totalCount}
         case "TOGGLE-IS-FETCHING":
             return {...state, isFetching: action.isFetching}
+        case  "TOGGLE-IS-FOLLOWING-PROGRESS":
+            return {...state, followingInProgress: action.followingInProgress}
         default:
             return state
     }
@@ -59,5 +63,6 @@ export let setUsers=(users:Array<UsersType>):UsersSetUserType=>({type:'SET-USER'
 export let setCurrentPage=(currentPage:number):SetCurrentPageType=>({type:'SET-CURRENT-PAGE',currentPage})
 export let setTotalCount=(totalCount:number):SetTotalCountType=>({type:'SET-TOTAL-COUNT',totalCount})
 export let toggleIsFetching=(isFetching:boolean):ToggleIsFetchingType=>({type:'TOGGLE-IS-FETCHING',isFetching})
+export let toggleFollowingInProgress=(followingInProgress:boolean):ToggleIsFollowingProgress=>({type:'TOGGLE-IS-FOLLOWING-PROGRESS',followingInProgress})
 
 export default usersReducer

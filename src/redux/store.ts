@@ -12,7 +12,7 @@ export type StoreType={
 }
 export type ActionType= AddPostActionType|OnPostChangeActionType|UpdateNewMessageType|SendMessageType |
     UsersActionFollowType | UsersActionUnFollowType|UsersSetUserType |
-    SetCurrentPageType | SetTotalCountType |ToggleIsFetchingType | SetUserProfileType|ReturnType<typeof setAuthUserData>
+    SetCurrentPageType | SetTotalCountType | ToggleIsFetchingType|ToggleIsFollowingProgress| SetUserProfileType|ReturnType<typeof setAuthUserData>
 
 
 
@@ -53,6 +53,10 @@ export type SendMessageType = {
 export type ToggleIsFetchingType = {
     type:'TOGGLE-IS-FETCHING'
     isFetching:boolean
+}
+export type ToggleIsFollowingProgress = {
+    type: 'TOGGLE-IS-FOLLOWING-PROGRESS'
+    followingInProgress: boolean
 }
 export type SetUserProfileType = {
     type:`SET-USER-PROFILE`

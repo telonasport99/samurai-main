@@ -7,7 +7,7 @@ import {
     follow,
     setCurrentPage,
     setTotalCount,
-    setUsers, toggleIsFetching,
+    setUsers, toggleFollowingInProgress, toggleIsFetching,
     unFollow, UsersType,
 } from "../../redux/user-reducer";
 import axios from "axios";
@@ -49,6 +49,8 @@ class UsersContainer extends React.Component<UsersPropsType> {
                    users={this.props.users}
                    follow={this.props.follow}
                    unFollow={this.props.unFollow}
+                   toggleFollowingInProgress={this.props.toggleFollowingInProgress}
+                   followingInProgress={this.props.followingInProgress}
             />
         </>
     }
@@ -61,6 +63,7 @@ type MapStatePropsType = {
     totalUserCount: number
     currentPage: number
     isFetching: boolean
+    followingInProgress:boolean
 }
 let mapStateToProps = (state: ReduxStateType): MapStatePropsType => {
     return {
@@ -68,7 +71,8 @@ let mapStateToProps = (state: ReduxStateType): MapStatePropsType => {
         pageSize: state.usersPage.pageSize,
         totalUserCount: state.usersPage.totalUserCount,
         currentPage: state.usersPage.currentPage,
-        isFetching: state.usersPage.isFetching
+        isFetching: state.usersPage.isFetching,
+        followingInProgress: state.usersPage.followingInProgress
     }
 }
 type MapDispatchPropsType = {
@@ -78,6 +82,7 @@ type MapDispatchPropsType = {
     setCurrentPage: (currentPage: number) => void
     setTotalCount: (totalCount: number) => void
     toggleIsFetching: (isFetching: boolean) => void
+    toggleFollowingInProgress:(followingInProgress:boolean)=>void
 }
 export type UsersPropsType = MapStatePropsType & MapDispatchPropsType;
 /*
@@ -107,5 +112,5 @@ let mapDispatchToProps = (dispatch: Dispatch): MapDispatchPropsType => {
 */
 
 export default compose<FC>(connect(mapStateToProps, {
-    follow, unFollow, setUsers, setCurrentPage, setTotalCount, toggleIsFetching
+    follow, unFollow, setUsers, setCurrentPage, setTotalCount, toggleIsFetching,toggleFollowingInProgress
 }))(UsersContainer);
