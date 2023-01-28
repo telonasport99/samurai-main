@@ -1,5 +1,6 @@
 import React from "react";
 import { ActionType} from "./store";
+import {authAPI} from "../api/api";
 
 const SET_USER_DATA = 'SET_USER_DATA';
 
@@ -33,7 +34,15 @@ export const authReducer = (state: InitialStateType = initialState, action: Acti
     }
 
 }
-
+export const getAuthUserData=()=>(dispatch:any)=>{
+    authAPI.me()
+        .then(response => {
+            if (response.data.resultCode === 0) {
+                let {id, email, login} = response.data.data;
+                dispatch(setAuthUserData(id, email, login))
+            }
+        })
+}
 export const setAuthUserData = (userId: number,
                                 email: string,
                                 login: string) => {

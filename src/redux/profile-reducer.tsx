@@ -8,6 +8,7 @@ import state, {
     ProfilePageType,
     RootStateType, SetUserProfileType
 } from "./store";
+import {usersAPI} from "../api/api";
 type profileReducerType = (state:ProfilePageType,action:ActionType)=>ProfilePageType
 let initialState = {
         posts: [
@@ -57,5 +58,11 @@ export let setUserProfile=(profile:any):SetUserProfileType=>{
         type:'SET-USER-PROFILE',
         profile
     }
+}
+export let getUserProfile=(userId:string)=>(dispatch:any)=>{
+    usersAPI.getProfile(userId)
+        .then(response => {
+            dispatch(setUserProfile(response.data))
+        })
 }
 export default profileReducer
