@@ -6,9 +6,9 @@ import state, {
     OnPostChangeActionType,
     PostsType,
     ProfilePageType,
-    RootStateType, SetUserProfileType
+    RootStateType, SetStatusActionType, SetUserProfileType
 } from "./store";
-import {usersAPI} from "../api/api";
+import {profileAPI, usersAPI} from "../api/api";
 type profileReducerType = (state:ProfilePageType,action:ActionType)=>ProfilePageType
 let initialState = {
         posts: [
@@ -17,7 +17,8 @@ let initialState = {
             {id: 3, message: 'hel', likesCount: 6},
         ],
         newPostText:'',
-        profile: null
+        profile: null,
+    status:''
 }
 const profileReducer=(state: ProfilePageType=initialState,action: ActionType): ProfilePageType=> {
     switch (action.type) {
@@ -36,13 +37,24 @@ const profileReducer=(state: ProfilePageType=initialState,action: ActionType): P
             newPostText:action.newPostText
             }
         case "SET-USER-PROFILE":
-            return {...state,
-            profile: action.profile
+            return {
+                ...state,
+                profile: action.profile
+            }
+            case "SET-STATUS":
+                return {...state,
+            status: action.status
             }
         default:
             return state
     }
 
+}
+export let setStatusActionCreator = (status:string):SetStatusActionType=>{
+    return {
+        type:"SET-STATUS",
+        status
+    }
 }
 export let addPostActionCreator = ():AddPostActionType=>{
     return {
@@ -65,4 +77,14 @@ export let getUserProfile=(userId:string)=>(dispatch:any)=>{
             dispatch(setUserProfile(response.data))
         })
 }
+export let getUserStatus = (userId:string)=>(dispatch:any)=>{
+    profileAPI.getStatus(userId)
+        .then(response=>
+        dispatch(setStatusActionCreator(response.data)))
+}
+export let updateUserStatus = (status:string)=>(dispatch:any)=>{
+    profileAPI.updateStatus(status)
+        .then(response=>{
+            if(response.data.resultCode === 0){
+        dispatch(setStatusActionCreator(status))}})}
 export default profileReducer

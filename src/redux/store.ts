@@ -12,10 +12,14 @@ export type StoreType={
 }
 export type ActionType= AddPostActionType|OnPostChangeActionType|UpdateNewMessageType|SendMessageType |
     UsersActionFollowType | UsersActionUnFollowType|UsersSetUserType |
-    SetCurrentPageType | SetTotalCountType | ToggleIsFetchingType|ToggleIsFollowingProgress| SetUserProfileType|ReturnType<typeof setAuthUserData>
+    SetCurrentPageType | SetTotalCountType | ToggleIsFetchingType|ToggleIsFollowingProgress|
+    SetUserProfileType|ReturnType<typeof setAuthUserData>|SetStatusActionType
 
 
-
+export type SetStatusActionType ={
+    type:'SET-STATUS'
+    status:string
+}
 export type AddPostActionType = {
     type:'ADD-POST'
 }
@@ -71,7 +75,8 @@ let store:StoreType = {
                 {id: 3, message: 'hel', likesCount: 6},
             ],
             newPostText:'',
-            profile: null
+            profile: null,
+            status:''
         },
         dialogsPage: {
             dialogs: [
@@ -86,7 +91,8 @@ let store:StoreType = {
             ],
             newMessageBody: ''
         },
-        sidebarPage:{}
+        sidebarPage:{},
+
 
     },
     getState() {
@@ -128,11 +134,13 @@ export type ProfileType = {
     lookingForAJobDescription: string
     photos: {small: string; large: string}
     userId: number;
+    status:string
 }
 export type ProfilePageType = {
     posts: Array<PostsType>
     newPostText:string
     profile: ProfileType | null
+    status:string
 }
 export type DialogsPageType = {
     dialogs: Array<DialogsType>,
