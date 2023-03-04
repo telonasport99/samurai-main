@@ -22,13 +22,13 @@ let mapStateToProps=(state:ReduxStateType)=>{
     }
 }
 type MapDispatchToProps = {
-    onSendMessageClick:()=>void
+    onSendMessageClick:(newMessageBody:any)=>void
     onNewMessageChange:(body:string)=>void
 }
 let mapDispatchToProps=(dispatch:Dispatch):MapDispatchToProps=>{
     return {
-        onSendMessageClick:()=>{
-            dispatch(sendMessageActionCreator())
+        onSendMessageClick:(newMessageBody:any)=>{
+            dispatch(sendMessageActionCreator(newMessageBody))
         },
         onNewMessageChange:(body:string)=>{
             dispatch(updateNewMessageBodyActionCreator(body))

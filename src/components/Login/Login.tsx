@@ -18,7 +18,7 @@ const LoginForm: React.FC<InjectedFormProps<FormDateType>> = (props) => {
     );
 };
 const LoginReduxForm = reduxForm<FormDateType>({
-    form: 'lodin'
+    form: 'login'
 })(LoginForm)
 const Login = ()=>{
     const onSubmit=(formData:FormDateType)=>{

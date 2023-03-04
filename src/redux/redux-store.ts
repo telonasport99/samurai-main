@@ -20,6 +20,6 @@ let reducers = combineReducers({
     form: formReducer
 })
 
-let store: StoreType = createStore(reducers,applyMiddleware(thunkMiddleware))
+let store= createStore(reducers,applyMiddleware(thunkMiddleware))
 
 export default store

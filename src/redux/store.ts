@@ -10,7 +10,7 @@ export type StoreType={
     subscribe:(observer:(state:RootStateType)=>void)=>void
     dispatch:(action:ActionType)=>void
 }
-export type ActionType= AddPostActionType|OnPostChangeActionType|UpdateNewMessageType|SendMessageType |
+export type ActionType= AddPostActionType|UpdateNewMessageType|SendMessageType |
     UsersActionFollowType | UsersActionUnFollowType|UsersSetUserType |
     SetCurrentPageType | SetTotalCountType | ToggleIsFetchingType|ToggleIsFollowingProgress|
     SetUserProfileType|ReturnType<typeof setAuthUserData>|SetStatusActionType
@@ -22,6 +22,7 @@ export type SetStatusActionType ={
 }
 export type AddPostActionType = {
     type:'ADD-POST'
+    newPostText:any
 }
 export type UsersActionFollowType = {
     type:'FOLLOW'
@@ -43,7 +44,6 @@ export type SetTotalCountType = {
     type:'SET-TOTAL-COUNT'
     totalCount:number
 }
-
 export type OnPostChangeActionType = {
     type:"ON-POST-CHANGE"
     newPostText:string}
@@ -52,7 +52,8 @@ export type UpdateNewMessageType = {
     body:string
 }
 export type SendMessageType = {
-    type:'SEND-MESSAGE'
+    type:'SEND-MESSAGE',
+    newMessageBody:any
 }
 export type ToggleIsFetchingType = {
     type:'TOGGLE-IS-FETCHING'
@@ -74,7 +75,6 @@ let store:StoreType = {
                 {id: 2, message: 'hel2', likesCount: 12},
                 {id: 3, message: 'hel', likesCount: 6},
             ],
-            newPostText:'',
             profile: null,
             status:''
         },
@@ -138,7 +138,6 @@ export type ProfileType = {
 }
 export type ProfilePageType = {
     posts: Array<PostsType>
-    newPostText:string
     profile: ProfileType | null
     status:string
 }

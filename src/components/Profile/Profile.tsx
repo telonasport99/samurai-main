@@ -1,6 +1,6 @@
 import React from "react";
 import ProfileInfo from "./ProfileInfo/ProfileInfo";
-import {ActionType, PostsType, ProfileType} from "../../redux/store";
+import {ProfileType} from "../../redux/store";
 import MypostContainer from "./Mypost/MypostContainer";
 
 export type ProfileProp = {
@@ -14,7 +14,7 @@ function Profile(props: ProfileProp) {
     return (
         <div >
             <ProfileInfo profile={props.profile} status={props.status} updateUserStatus={props.updateUserStatus}/>
-           <MypostContainer />
+           <MypostContainer  />
         </div>
     )
 }

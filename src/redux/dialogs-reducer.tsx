@@ -1,14 +1,9 @@
 import React from "react";
-import state, {
+import  {
     ActionType, DialogsPageType,
-    DialogsType,
-    MessageType,
-    PostsType,
-    RootStateType,
     SendMessageType,
     UpdateNewMessageType
 } from "./store";
-import profileReducer from "./profile-reducer";
 
 let initialState = {
     dialogs: [
@@ -27,7 +22,7 @@ type dialogsReducerType = (state:DialogsPageType,action:ActionType)=>DialogsPage
 const dialogsReducer=(state: DialogsPageType=initialState,action: ActionType): DialogsPageType=> {
     switch (action.type) {
         case "SEND-MESSAGE":
-            let body = state.newMessageBody
+            let body = action.newMessageBody
             return {
                 ...state,
                 newMessageBody:'',
@@ -43,9 +38,10 @@ const dialogsReducer=(state: DialogsPageType=initialState,action: ActionType): D
     }
 
 }
-export let sendMessageActionCreator = ():SendMessageType=>{
+export let sendMessageActionCreator = (newMessageBody:any):SendMessageType=>{
     return {
-        type:'SEND-MESSAGE'
+        type:'SEND-MESSAGE',
+        newMessageBody
     }
 }
 export let updateNewMessageBodyActionCreator=(body:string):UpdateNewMessageType=>{
