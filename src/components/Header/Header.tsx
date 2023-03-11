@@ -3,7 +3,7 @@ import s from './Header.module.css';
 import {NavLink} from "react-router-dom";
 
 type HeaderPropsType = {
-    userId: number | null
+    userId: string | null
     email: string | null
     login: string | null
     isAuth: boolean

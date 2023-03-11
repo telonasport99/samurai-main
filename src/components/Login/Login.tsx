@@ -1,4 +1,5 @@
 import React from 'react';
+import styles from './../common/FormsControls/FormsControls.module.css'
 import {Field, InjectedFormProps, reduxForm} from "redux-form";
 import {Input} from "../common/FormsControls/FormsControls";
 import {required} from "../../utilis/validators";
@@ -18,6 +19,9 @@ const LoginForm: React.FC<InjectedFormProps<FormDateType>> = (props) => {
                 <div><Field placeholder={'Email'} name={'email'} component={Input} validate={[required]}/></div>
                 <div><Field placeholder={'Password'} name={'password'} validate={[required]} component={Input} type={'password'}/></div>
                 <div><Field component={Input} name={'rememberMe'} type={"checkbox"}/>remember</div>
+                {props.error && <div className={styles.formSummaryError}>
+                    {props.error}
+                </div>}
                 <div><button>login</button></div>
             </form>
         </div>

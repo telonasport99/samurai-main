@@ -14,6 +14,8 @@ type PathParamType={
 type mapStateToPropsType = {
     profile: ProfileType | null
     status:string
+    autorizedUserId:string|null
+    isAuth:boolean
 }
 type MapDispatchPropsType = {
     getUserProfile:(profileId:string)=>void
@@ -27,7 +29,7 @@ class ProfileContainer extends React.Component<PropsType>{
     componentDidMount() {
         let userId = this.props.match.params.userId
         if(!userId){
-            userId = '27187'
+            userId = '' +this.props.autorizedUserId
         }
         this.props.getUserProfile(userId)
         this.props.getUserStatus(userId)
@@ -45,7 +47,9 @@ class ProfileContainer extends React.Component<PropsType>{
 
 let mapStateToProps = (state: ReduxStateType):mapStateToPropsType =>
     ({ profile: state.profilePage.profile,
-        status: state.profilePage.status
+        status: state.profilePage.status,
+        autorizedUserId:state.auth.userId,
+        isAuth: state.auth.isAuth
     })
 let WithUrlDataComponent = withRouter(ProfileContainer)
 

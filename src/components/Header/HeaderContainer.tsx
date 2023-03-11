@@ -8,7 +8,7 @@ import {getAuthUserData, logout, setAuthUserData} from "../../redux/auth-reducer
 import {authAPI} from "../../api/api";
 
 type MapStatePropsType = {
-    userId: number | null
+    userId: string | null
     email: string | null
     login: string | null
     isAuth: boolean
