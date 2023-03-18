@@ -13,7 +13,7 @@ export type StoreType={
 export type ActionType= AddPostActionType|UpdateNewMessageType|SendMessageType |
     UsersActionFollowType | UsersActionUnFollowType|UsersSetUserType |
     SetCurrentPageType | SetTotalCountType | ToggleIsFetchingType|ToggleIsFollowingProgress|
-    SetUserProfileType|ReturnType<typeof setAuthUserData>|SetStatusActionType
+    SetUserProfileType|ReturnType<typeof setAuthUserData>|SetStatusActionType| SetInitializedType
 
 
 export type SetStatusActionType ={
@@ -66,6 +66,9 @@ export type ToggleIsFollowingProgress = {
 export type SetUserProfileType = {
     type:`SET-USER-PROFILE`
     profile:null
+}
+export type SetInitializedType = {
+    type:`INITIALIZED_SUCCESS`
 }
 let store:StoreType = {
     _state:  {
