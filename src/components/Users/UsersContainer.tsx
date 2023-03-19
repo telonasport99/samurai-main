@@ -11,6 +11,12 @@ import {
 } from "../../redux/user-reducer";
 import Users from "./Users";
  import Preloader from "../common/Preloader/Preloader";
+import {
+    getCurrentPageSelector, getFollowingInProgressSelector, getIsFetchingSelector,
+    getPageSizeSelector,
+    getTotalUsersCountSelector,
+    getUsersSelector
+} from "../../redux/user-selector";
 
 
 class UsersContainer extends React.Component<UsersPropsType> {
@@ -65,12 +71,12 @@ type MapStatePropsType = {
 }
 let mapStateToProps = (state: ReduxStateType): MapStatePropsType => {
     return {
-        users: state.usersPage.users,
-        pageSize: state.usersPage.pageSize,
-        totalUserCount: state.usersPage.totalUserCount,
-        currentPage: state.usersPage.currentPage,
-        isFetching: state.usersPage.isFetching,
-        followingInProgress: state.usersPage.followingInProgress
+        users: getUsersSelector(state),
+        pageSize: getPageSizeSelector(state),
+        totalUserCount: getTotalUsersCountSelector(state),
+        currentPage: getCurrentPageSelector(state),
+        isFetching: getIsFetchingSelector(state),
+        followingInProgress: getFollowingInProgressSelector(state)
     }
 }
 type MapDispatchPropsType = {
@@ -84,31 +90,7 @@ type MapDispatchPropsType = {
     getUsers:(currentPage:number,pageSize:number)=>void
 }
 export type UsersPropsType = MapStatePropsType & MapDispatchPropsType;
-/*
-let mapDispatchToProps = (dispatch: Dispatch): MapDispatchPropsType => {
-    return {
-        follow: (userId: number) => {
-            dispatch(followAC(userId))
-        },
-        unfollow: (userId: number) => {
-            dispatch(unFollowAC(userId))
-        },
-        setUsers: (users: Array<UsersType>) => {
-            dispatch(setUserAC(users))
-        },
-        setCurrentPage: (currentPage: number) => {
-            dispatch(setCurrentPageAC(currentPage))
-        },
-        setTotalCount: (totalCount: number) => {
-            dispatch(setTotalCountAC(totalCount))
-        },
-        toggleIsFetching:(isFetching:boolean)=>{
-            dispatch(toggleIsFetchingAC(isFetching))
-        }
-    }
 
-}
-*/
 
 export default compose<FC>(connect(mapStateToProps, {
     follow, unFollow,
