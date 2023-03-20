@@ -12,10 +12,10 @@ import {
 import Users from "./Users";
  import Preloader from "../common/Preloader/Preloader";
 import {
-    getCurrentPageSelector, getFollowingInProgressSelector, getIsFetchingSelector,
-    getPageSizeSelector,
-    getTotalUsersCountSelector,
-    getUsersSelector
+    currentPageSelector, followingInProgressSelector, isFetchingSelector,
+    pageSizeSelector,
+    totalUsersCountSelector,
+    usersSelector
 } from "../../redux/user-selector";
 
 
@@ -71,12 +71,12 @@ type MapStatePropsType = {
 }
 let mapStateToProps = (state: ReduxStateType): MapStatePropsType => {
     return {
-        users: getUsersSelector(state),
-        pageSize: getPageSizeSelector(state),
-        totalUserCount: getTotalUsersCountSelector(state),
-        currentPage: getCurrentPageSelector(state),
-        isFetching: getIsFetchingSelector(state),
-        followingInProgress: getFollowingInProgressSelector(state)
+        users:  usersSelector(state),
+        pageSize: pageSizeSelector(state),
+        totalUserCount: totalUsersCountSelector(state),
+        currentPage: currentPageSelector(state),
+        isFetching: isFetchingSelector(state),
+        followingInProgress: followingInProgressSelector(state)
     }
 }
 type MapDispatchPropsType = {
