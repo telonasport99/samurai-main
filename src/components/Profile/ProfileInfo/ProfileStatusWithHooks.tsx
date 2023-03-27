@@ -1,4 +1,4 @@
-import React, {ChangeEvent, ChangeEventHandler, useState} from 'react';
+import React, {ChangeEvent, ChangeEventHandler, useEffect, useState} from 'react';
 import s from "./ProfileInfo.module.css";
 import Preloader from "../../common/Preloader/Preloader";
 import {ProfileType} from "../../../redux/store";
@@ -19,6 +19,9 @@ const ProfileStatusWithHooks =  (props:Props)=> {
    let onStatusChange=(e:ChangeEvent<HTMLInputElement>)=>{
        setStatus(e.currentTarget.value)
    }
+   useEffect(()=>{
+       setStatus(props.status)
+   },[props.status])
         return (
             <>
                 {!editMode&&<div>
