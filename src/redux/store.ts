@@ -13,7 +13,7 @@ export type StoreType={
 export type ActionType= AddPostActionType|UpdateNewMessageType|SendMessageType |
     UsersActionFollowType | UsersActionUnFollowType|UsersSetUserType |
     SetCurrentPageType | SetTotalCountType | ToggleIsFetchingType|ToggleIsFollowingProgress|
-    SetUserProfileType|ReturnType<typeof setAuthUserData>|SetStatusActionType| SetInitializedType
+    SetUserProfileType|ReturnType<typeof setAuthUserData>|SetStatusActionType| SetInitializedType|DeletePostActionType
 
 
 export type SetStatusActionType ={
@@ -23,6 +23,10 @@ export type SetStatusActionType ={
 export type AddPostActionType = {
     type:'ADD-POST'
     newPostText:any
+}
+export type DeletePostActionType = {
+    type:'DELETE-POST'
+    postId:number
 }
 export type UsersActionFollowType = {
     type:'FOLLOW'

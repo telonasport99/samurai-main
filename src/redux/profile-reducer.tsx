@@ -2,7 +2,7 @@ import React from "react";
 import {RootStateOrAny} from "react-redux";
 import state, {
     ActionType,
-    AddPostActionType,
+    AddPostActionType, DeletePostActionType,
     OnPostChangeActionType,
     PostsType,
     ProfilePageType,
@@ -39,6 +39,8 @@ const profileReducer=(state: ProfilePageType=initialState,action: ActionType): P
                 return {...state,
             status: action.status
             }
+        case 'DELETE-POST':
+            return {...state, posts:state.posts.filter(el=>el.id!=action.postId)}
         default:
             return state
     }
@@ -54,6 +56,12 @@ export let addPostActionCreator = (newPostText:any):AddPostActionType=>{
     return {
         type:'ADD-POST',
         newPostText
+    }
+}
+export let deletePostActionCreator = (postId:number):DeletePostActionType=>{
+    return {
+        type:'DELETE-POST',
+        postId
     }
 }
 export let setUserProfile=(profile:any):SetUserProfileType=>{
