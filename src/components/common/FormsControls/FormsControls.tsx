@@ -1,5 +1,7 @@
 import React from 'react';
 import s from './FormsControls.module.css'
+import {required} from "../../../utilis/validators";
+import {Field} from "redux-form";
 
 export const FormComponent = ({input, meta, placeholder, children, ...props}:any) => {
     // error check

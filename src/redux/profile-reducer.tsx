@@ -70,20 +70,15 @@ export let setUserProfile=(profile:any):SetUserProfileType=>{
         profile
     }
 }
-export let getUserProfile=(userId:string)=>(dispatch:any)=>{
-    usersAPI.getProfile(userId)
-        .then(response => {
+export let getUserProfile=(userId:string)=>async (dispatch:any)=>{
+ let response = await usersAPI.getProfile(userId)
             dispatch(setUserProfile(response.data))
-        })
 }
-export let getUserStatus = (userId:string)=>(dispatch:any)=>{
-    profileAPI.getStatus(userId)
-        .then(response=>
-        dispatch(setStatusActionCreator(response.data)))
-}
-export let updateUserStatus = (status:string)=>(dispatch:any)=>{
-    profileAPI.updateStatus(status)
-        .then(response=>{
+export let getUserStatus = (userId:string)=>async (dispatch:any)=>{
+    let response = await profileAPI.getStatus(userId)
+        dispatch(setStatusActionCreator(response.data))}
+export let updateUserStatus = (status:string)=>async (dispatch:any)=>{
+    let response = await  profileAPI.updateStatus(status)
             if(response.data.resultCode === 0){
-        dispatch(setStatusActionCreator(status))}})}
+        dispatch(setStatusActionCreator(status))}}
 export default profileReducer

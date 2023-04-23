@@ -1,12 +1,12 @@
 import React from "react";
-import {applyMiddleware, combineReducers, createStore, Store} from "redux";
+import {applyMiddleware, combineReducers, compose, createStore, Store} from "redux";
 import profileReducer from "./profile-reducer";
 import dialogsReducer from "./dialogs-reducer";
 import {ActionType} from "./store";
 import usersReducer from "./user-reducer";
 import {authReducer} from "./auth-reducer";
 import thunkMiddleware from 'redux-thunk'
-import {reducer as formReducer} from 'redux-form'
+import {reducer, reducer as formReducer} from 'redux-form'
 import {appReducer} from "./app-reducer";
 
 export type RootState = typeof reducers
@@ -22,6 +22,14 @@ let reducers = combineReducers({
     app: appReducer
 })
 
-let store= createStore(reducers,applyMiddleware(thunkMiddleware))
+declare global {
+    interface Window {
+        __REDUX_DEVTOOLS_EXTENSION_COMPOSE__?: typeof compose;
+    }
+}
+const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
+const store = createStore(reducers,  composeEnhancers(
+    applyMiddleware(thunkMiddleware)
+));
 
 export default store

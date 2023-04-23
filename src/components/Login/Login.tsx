@@ -12,15 +12,15 @@ type FormDateType ={
         password:string
     rememberMe:boolean
 }
-const LoginForm: React.FC<InjectedFormProps<FormDateType>> = (props) => {
+const LoginForm: React.FC<InjectedFormProps<FormDateType>> = ({handleSubmit,error}) => {
     return (
         <div>
-            <form onSubmit={props.handleSubmit}>
+            <form onSubmit={handleSubmit}>
                 <div><Field placeholder={'Email'} name={'email'} component={Input} validate={[required]}/></div>
                 <div><Field placeholder={'Password'} name={'password'} validate={[required]} component={Input} type={'password'}/></div>
                 <div><Field component={Input} name={'rememberMe'} type={"checkbox"}/>remember</div>
-                {props.error && <div className={styles.formSummaryError}>
-                    {props.error}
+                {error && <div className={styles.formSummaryError}>
+                    {error}
                 </div>}
                 <div><button>login</button></div>
             </form>

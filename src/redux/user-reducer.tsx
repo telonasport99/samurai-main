@@ -64,38 +64,35 @@ export let setCurrentPage=(currentPage:number):SetCurrentPageType=>({type:'SET-C
 export let setTotalCount=(totalCount:number):SetTotalCountType=>({type:'SET-TOTAL-COUNT',totalCount})
 export let toggleIsFetching=(isFetching:boolean):ToggleIsFetchingType=>({type:'TOGGLE-IS-FETCHING',isFetching})
 export let toggleFollowingInProgress=(followingInProgress:boolean):ToggleIsFollowingProgress=>({type:'TOGGLE-IS-FOLLOWING-PROGRESS',followingInProgress})
+
+
 export const getUsers=(currentPage:number,pageSize:number) =>{
-return (dispatch:any)=>{
+return async(dispatch:any)=>{
    dispatch(toggleIsFetching(true))
     dispatch(setCurrentPage(currentPage))
-    usersAPI.getUsers(currentPage,pageSize).then(data => {
+    let data = await usersAPI.getUsers(currentPage,pageSize)
        dispatch(toggleIsFetching(false))
         dispatch(setUsers(data.items))
         dispatch(setTotalCount(data.totalCount))
-    })
-}}
+    }}
 export const follow=(userId:number) =>{
-return (dispatch:any)=>{
+return  async (dispatch:any)=>{
     dispatch(toggleFollowingInProgress(true))
-    usersAPI.follow(userId)
-        .then(response => {
+    let response = await usersAPI.follow(userId)
             if(response.data.resultCode == 0){
                 dispatch(followSuccess(userId))
             }
             dispatch(toggleFollowingInProgress(false))
-        })
     }
 }
 export const unFollow=(userId:number) =>{
-return (dispatch:any)=>{
+return async (dispatch:any)=>{
     dispatch(toggleFollowingInProgress(true))
-    usersAPI.unfollow(userId)
-        .then(response => {
+    let response = await usersAPI.unfollow(userId)
             if(response.data.resultCode == 0){
                 dispatch(unfollowSuccess(userId))
             }
             dispatch(toggleFollowingInProgress(false))
-        })
-    }
+        }
 }
 export default usersReducer
